@@ -1,0 +1,139 @@
+/* Todo.css */
+
+/* Заголовок */
+h1 {
+    text-align: center;
+    color: #1a1a1a; /* Темный угольный для выразительности */
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    font-family: 'Poppins', sans-serif; /* Современный шрифт */
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  
+  /* Контейнер для ввода задачи и кнопки */
+  .input-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+  
+  /* Поле ввода задачи */
+  input[type="text"] {
+    width: 350px;
+    padding: 12px 15px;
+    margin-right: 15px;
+    border-radius: 8px;
+    border: none;
+    background-color: #f0f0f0; /* Мягкий серый фон */
+    font-size: 1.1rem;
+    font-family: 'Inter', sans-serif; /* Четкий и читаемый шрифт */
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+  
+  input[type="text"]:focus {
+    outline: none;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Кнопка "Добавить" */
+  button {
+    padding: 12px 25px;
+    background: linear-gradient(135deg, #6b48ff, #00ddeb); /* Модный градиент */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(107, 72, 255, 0.4);
+  }
+  
+  /* Список задач */
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 600px; /* Центрированный, ограниченный список */
+  }
+  
+  /* Элемент списка задач */
+  li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Легкая тень для объема */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  li:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  }
+  
+  /* Текст задачи */
+  .task-text {
+    flex: 1;
+    font-size: 1.2rem;
+    font-family: 'Inter', sans-serif;
+    color: #333;
+    margin-left: 10px; /* Отступ от чекбокса */
+  }
+  
+  /* Чекбокс */
+  input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    accent-color: #6b48ff; /* Цвет из градиента кнопки */
+    cursor: pointer;
+  }
+  
+  /* Зачеркнутый текст для выполненной задачи */
+  .completed .task-text {
+    text-decoration: line-through;
+    color: #888; /* Приглушенный цвет для завершенных задач */
+  }
+  
+  /* Иконки (редактирование и удаление) */
+  .icon {
+    cursor: pointer;
+    margin-left: 15px;
+    font-size: 1.6rem;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+  
+  .icon:hover {
+    transform: scale(1.2); /* Легкое увеличение при наведении */
+  }
+  
+  /* Цвет для крестика (удаление) */
+  .icon-delete {
+    color: #ff4d4d; /* Яркий красный */
+  }
+  
+  .icon-delete:hover {
+    color: #ff1a1a;
+  }
+  
+  /* Цвет для карандаша (редактирование) */
+  .icon-edit {
+    color: #00ddeb; /* Циан из градиента */
+  }
+  
+  .icon-edit:hover {
+    color: #00b8d4;
+  }
