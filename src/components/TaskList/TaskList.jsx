@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import TaskItem from "./TaskItem";
+import TaskItem from "../TaskItem/TaskItem.jsx";
 import { Droppable } from "react-beautiful-dnd";
 import { IoAdd } from "react-icons/io5";
+import "./TaskList.css"; // Локальный CSS
 
 const TaskList = ({
   category,
@@ -42,11 +43,55 @@ const TaskList = ({
     setNewPriority("Low");
   };
 
+  const sortedTasks = tasks.sort((a, b) => {
+    const priorityOrder = { High: 1, Medium: 2, Low: 3 };
+    return priorityOrder[a.priority] - priorityOrder[b.priority];
+  });
+
   return (
     <div className="category-container">
       <div className="category-header">
         <h2 className="category-title">{category} ({tasks.length})</h2>
       </div>
+      {/* Кнопка и форма добавления вне Droppable */}
+      <div className="add-task-section">
+        {isAdding ? (
+          <div className="task-form">
+            <textarea
+              value={newTaskText}
+              onChange={(e) => setNewTaskText(e.target.value)}
+              placeholder="Введите задачу"
+              onKeyDown={handleKeyPress}
+              autoFocus
+            />
+            <input
+              type="date"
+              value={newDeadline}
+              onChange={(e) => setNewDeadline(e.target.value)}
+            />
+            <select
+              value={newPriority}
+              onChange={(e) => setNewPriority(e.target.value)}
+            >
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+            <div className="task-form-actions">
+              <button onClick={handleAddTask}>Сохранить</button>
+              <button onClick={cancelAddTask}>Отмена</button>
+            </div>
+          </div>
+        ) : (
+          <button
+            className="add-task-button"
+            onClick={() => setIsAdding(true)}
+          >
+            <IoAdd /> Добавить задачу
+          </button>
+        )}
+      </div>
+      {/* Зона перетаскивания только для списка задач */}
       <Droppable droppableId={`${category}`}>
         {(provided) => (
           <div
@@ -54,43 +99,8 @@ const TaskList = ({
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-            {isAdding ? (
-              <div className="task-form">
-                <textarea
-                  value={newTaskText}
-                  onChange={(e) => setNewTaskText(e.target.value)}
-                  placeholder="Введите задачу"
-                  onKeyDown={handleKeyPress}
-                  autoFocus
-                />
-                <input
-                  type="date"
-                  value={newDeadline}
-                  onChange={(e) => setNewDeadline(e.target.value)}
-                />
-                <select
-                  value={newPriority}
-                  onChange={(e) => setNewPriority(e.target.value)}
-                >
-                  <option value="High">High</option>
-                  <option value="Medium">Medium</option>
-                  <option value="Low">Low</option>
-                </select>
-                <div className="task-form-actions">
-                  <button onClick={handleAddTask}>Сохранить</button>
-                  <button onClick={cancelAddTask}>Отмена</button>
-                </div>
-              </div>
-            ) : (
-              <button
-                className="add-task-button"
-                onClick={() => setIsAdding(true)}
-              >
-                <IoAdd /> Добавить задачу
-              </button>
-            )}
             <ul>
-              {tasks.map((task, index) => (
+              {sortedTasks.map((task, index) => (
                 <TaskItem
                   key={task.id}
                   task={task}

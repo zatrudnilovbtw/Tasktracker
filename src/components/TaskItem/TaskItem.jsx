@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { IoClose, IoReorderThree } from "react-icons/io5";
+import "./TaskItem.css"; // Локальный CSS
 
 const TaskItem = ({ task, toggleTask, editTask, deleteTask, index }) => {
   const [editText, setEditText] = useState(task.task);
