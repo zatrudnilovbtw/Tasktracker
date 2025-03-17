@@ -34,6 +34,7 @@ const Todo = () => {
       status: "To Do",
       deadline: deadline,
       priority: priority,
+      completedAt: null, // Добавляем поле для даты завершения
     };
     setTasks((prevTasks) => [...prevTasks, newTask]);
   };

@@ -1,58 +1,66 @@
 import { useState } from "react";
 import "./Layout.css";
-import { FaRegWindowMaximize } from "react-icons/fa";
+import { FaRegClipboard } from "react-icons/fa";
+import { CgNotes } from "react-icons/cg";
 import { GrTask } from "react-icons/gr";
-import { IoClipboardOutline } from "react-icons/io5";
 import { TfiTimer } from "react-icons/tfi";
-import { VscSettingsGear } from "react-icons/vsc";
+import { IoMenu } from "react-icons/io5"; // Иконка бургера
 
-const Layout = ({ children }) => {
-  const [activePage, setActivePage] = useState("todo");
+const Layout = ({ dashboard, todo, notes, pomadoro, settings }) => {
+  const [activePage, setActivePage] = useState("dashboard"); // Начальное значение "dashboard"
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const handlePageChange = (page) => {
+    setActivePage(page);
+    setIsSidebarOpen(false); // Закрываем сайдбар при выборе страницы
+  };
 
   const renderContent = () => {
     switch (activePage) {
       case "dashboard":
-        return <h1>Dashboard (в разработке)</h1>;
+        return dashboard;
       case "todo":
-        return children;
-      case "whiteboard":
-        return <h1>Whiteboard (в разработке)</h1>;
+        return todo;
+      case "notes":
+        return notes;
       case "pomadoro":
-        return <h1>Pomadoro (в разработке)</h1>;
+        return pomadoro;
       case "settings":
-        return <h1>Настройки (в разработке)</h1>;
+        return settings;
       default:
         return <h1>Страница не найдена</h1>;
     }
   };
+
   return (
     <div className="layout-container">
-      <aside className="sidebar">
-        <h2>ZATRUtracker </h2>
+      <button
+        className="sidebar-toggle"
+        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+      >
+        <IoMenu size={24} />
+      </button>
+      <aside className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
+        <h2>TrackIT</h2>
         <ul>
-          <li onClick={() => setActivePage("dashboard")}>
+          <li onClick={() => handlePageChange("dashboard")}>
             <span className="icon">
-              <FaRegWindowMaximize  /> Dashboard
+              <FaRegClipboard /> Dashboard
             </span>
           </li>
-          <li onClick={() => setActivePage("todo")}>
+          <li onClick={() => handlePageChange("todo")}>
             <span className="icon">
-              <GrTask  /> Task
+              <GrTask /> Task
             </span>
           </li>
-          <li onClick={() => setActivePage("whiteboard")}>
+          <li onClick={() => handlePageChange("notes")}>
             <span className="icon">
-              <IoClipboardOutline /> Whiteboard
+              <CgNotes /> Notes
             </span>
           </li>
-          <li onClick={() => setActivePage("pomadoro")}>
+          <li onClick={() => handlePageChange("pomadoro")}>
             <span className="icon">
               <TfiTimer /> Pomadoro
-            </span>
-          </li>
-          <li onClick={() => setActivePage("settings")}>
-            <span className="icon">
-              <VscSettingsGear /> Setiings
             </span>
           </li>
         </ul>

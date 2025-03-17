@@ -1,22 +1,24 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import path from 'path'; // Добавляем модуль path для работы с путями
+import path from 'path';
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
   resolve: {
-    // Указываем расширения файлов, которые Vite должен обрабатывать
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
-    // Настраиваем псевдонимы для упрощения импортов (опционально)
     alias: {
-      '@': path.resolve(__dirname, './src'), // Позволяет использовать абсолютные пути, например, '@/components/Todo/Todo.jsx'
+      '@': path.resolve(__dirname, './src'),
     },
   },
   server: {
-    // Устанавливаем строгую проверку путей на сервере разработки
     fs: {
-      strict: true, // Запрещает доступ к файлам вне корня проекта
+      strict: true,
     },
+    allowedHosts: [
+      'ad3a-195-158-193-250.ngrok-free.app', // Add the new ngrok URL here
+      'localhost',
+    ],
+    host: '0.0.0.0', // Allows external access
+    port: 5173, // Ensure this matches your intended port
   },
 });

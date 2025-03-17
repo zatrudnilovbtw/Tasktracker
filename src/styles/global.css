@@ -1,12 +1,14 @@
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Inter", sans-serif;
+  font-family: 'JetBrains Mono', monospace;
 }
 
 body {
-  background: #1a1a1a;
+  background: #222;
   color: #fff;
-  /* padding: 20px; */
+  
 }

@@ -1,0 +1,298 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&display=swap");
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background: #222;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+.timer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  max-width: 600px; /* Ограничиваем ширину для лучшего вида */
+  width: 100%; /* Занимаем всю доступную ширину внутри .main-content */
+  margin: 0 auto; /* Центрируем внутри .main-content */
+  background: #222;
+  font-family: "Roboto Mono", monospace;
+  color: #e0e0e0;
+  box-sizing: border-box;
+  position: relative;
+  padding: 20px;
+}
+
+/* На мобильных ничего не меняем */
+@media (max-width: 48rem) {
+  .timer-container {
+    max-width: 100%; /* На мобильных занимаем всю ширину */
+    padding: 10px;
+  }
+}
+
+.timer {
+  font-size: 96px;
+  font-weight: 500;
+  color: #e0e0e0;
+  margin: 20px 0;
+  letter-spacing: 4px;
+  text-align: center;
+  padding: 15px 30px;
+  transition: transform 0.2s ease;
+}
+
+.button-group {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.button {
+  padding: 12px 24px;
+  font-size: 16px;
+  font-family: "Roboto Mono", monospace;
+  border: 1px solid #444;
+  border-radius: 4px;
+  background: #2e2e2e;
+  color: #e0e0e0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.button:hover {
+  background: #444;
+  color: #fff;
+}
+
+.button:active {
+  background: #555;
+  transform: scale(0.98);
+}
+
+.progress {
+  height: 8px;
+  background: #444;
+  border-radius: 4px;
+  width: 30%;
+  max-width: 100%;
+  position: relative;
+  overflow: hidden;
+  margin: 20px 0;
+}
+
+.progress-inner {
+  height: 100%;
+  background: #ffd700;
+  width: 0;
+  transition: width 1s ease-in-out;
+}
+
+.message {
+  font-size: 24px;
+  color: #e0e0e0;
+  margin: 10px 0;
+  text-align: center;
+  opacity: 0.8;
+}
+
+.settings-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  transition: transform 0.2s ease;
+}
+
+.settings-button img {
+  width: 24px;
+  height: 24px;
+  filter: brightness(1.5);
+}
+
+.settings-button:hover {
+  transform: scale(1.1);
+}
+
+.settings-button:active {
+  transform: scale(0.95);
+}
+
+/* Модальное окно */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content {
+  background: #2e2e2e;
+  padding: 20px;
+  border-radius: 6px;
+  color: #e0e0e0;
+  font-family: "Roboto Mono", monospace;
+  text-align: center;
+  min-width: 350px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  animation: slideIn 0.3s ease-in-out;
+}
+
+.modal-content h2 {
+  margin: 0 0 20px 0;
+  font-size: 24px;
+  color: #ffd700;
+}
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 15px 0;
+}
+
+.settings-row label {
+  font-size: 16px;
+  color: #e0e0e0;
+}
+
+.settings-input {
+  width: 60px;
+  padding: 8px;
+  background: #444;
+  border: 1px solid #555;
+  color: #e0e0e0;
+  font-family: "Roboto Mono", monospace;
+  border-radius: 4px;
+  transition: border-color 0.2s ease;
+}
+
+.settings-input:focus {
+  border-color: #ffd700;
+  outline: none;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.save-button {
+  padding: 10px 25px;
+  background: #ffd700;
+  border: none;
+  color: #1a1a1a;
+  font-family: "Roboto Mono", monospace;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.save-button:hover {
+  background: #e6c200;
+}
+
+.close-button {
+  padding: 10px 25px;
+  background: #555;
+  border: none;
+  color: #e0e0e0;
+  font-family: "Roboto Mono", monospace;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.close-button:hover {
+  background: #777;
+}
+
+/* Счетчик циклов */
+.cycle-counter {
+  margin-top: 20px;
+  padding: 10px 20px;
+}
+
+.button-cycle {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-family: "Roboto Mono", monospace;
+  border: 1px solid #444;
+  border-radius: 4px;
+  background: #2e2e2e;
+  color: #e0e0e0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.button-cycle:hover {
+  background: #444;
+  color: #fff;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.volume-slider {
+  width: 100%;
+  cursor: pointer;
+  appearance: none;
+  height: 6px;
+  background: #444;
+  border-radius: 4px;
+  outline: none;
+  transition: background 0.2s;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: #ffd700;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  background: #ffd700;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.completed {
+  margin-bottom: 10px;
+}
