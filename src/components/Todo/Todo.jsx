@@ -24,6 +24,9 @@ const Todo = () => {
     if (isLoaded) localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks, isLoaded]);
 
+
+
+
   const addTask = (category, taskText, deadline = null, priority = "Low") => {
     if (!taskText.trim()) return;
     const newTask = {
@@ -97,6 +100,9 @@ const Todo = () => {
 
   return (
     <div className="todo-container">
+      <button onClick={Send}>SendSendSendSend</button>
+
+
       {/* Поле для поиска с иконкой и кнопкой очистки */}
       <div className="search-bar">
         <div className="search-wrapper">
