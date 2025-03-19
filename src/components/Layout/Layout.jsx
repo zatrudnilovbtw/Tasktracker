@@ -50,7 +50,7 @@ const Layout = ({ dashboard, todo, notes, pomadoro, settings }) => {
           </li>
           <li onClick={() => handlePageChange("todo")}>
             <span className="icon">
-              <GrTask /> Task
+              <GrTask /> Tasks
             </span>
           </li>
           <li onClick={() => handlePageChange("notes")}>
@@ -60,7 +60,7 @@ const Layout = ({ dashboard, todo, notes, pomadoro, settings }) => {
           </li>
           <li onClick={() => handlePageChange("pomadoro")}>
             <span className="icon">
-              <TfiTimer /> Pomadoro
+              <TfiTimer /> Pomodoro
             </span>
           </li>
         </ul>
