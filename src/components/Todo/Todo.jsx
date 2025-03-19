@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import { v4 as uuidv4 } from "uuid";
-import TaskList from "../Tasklist/TaskList.jsx";
+import TaskList from "../TaskList/TaskList.jsx";
 import { IoSearch, IoClose } from "react-icons/io5"; // Импорт иконок
 import "./Todo.css";
 import "../../styles/animations.css";
