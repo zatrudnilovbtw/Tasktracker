@@ -40,6 +40,8 @@ const Layout = ({ dashboard, todo, notes, pomadoro, settings }) => {
       </button>
       <aside className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
         <h2>TrackIT</h2>
+        <p>сайт в бета тесте</p>
+        
         <ul>
           <li onClick={() => handlePageChange("dashboard")}>
             <span className="icon">
