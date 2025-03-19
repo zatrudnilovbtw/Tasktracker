@@ -1,0 +1,149 @@
+.note-item {
+  width: 220px;
+  padding: 12px;
+  border: 2px solid #333;
+  border-radius: 6px;
+  background: #2e2e2e;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  font-family: "Roboto Mono", monospace;
+  color: #e0e0e0;
+  transition: transform 0.2s ease, border-color 0.2s ease, height 0.3s ease;
+  position: relative;
+  height: 120px;
+}
+
+.note-item.expanded {
+  height: auto;
+}
+
+.note-item.draggable-source--is-dragging {
+  opacity: 0.5;
+}
+
+.note-header {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px 4px 0 0;
+}
+
+.note-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #fff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.note-header span {
+  font-size: 0.85rem;
+  color: #bbb;
+}
+
+.note-preview {
+  margin-top: 8px;
+  padding: 0 8px;
+}
+
+.note-preview p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #e0e0e0;
+  opacity: 0.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.note-content {
+  margin-top: 10px;
+  padding: 8px;
+  background: #2e2e2e;
+  border-radius: 4px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.note-content p {
+  margin: 0;
+  font-size: 1rem;
+  color: #e0e0e0;
+  line-height: 1.4;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.toggle-icon {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  font-size: 1.2rem;
+  color: #bbb;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.toggle-icon:hover {
+  color: #4a90e2;
+  background: rgba(74, 144, 226, 0.1);
+}
+
+.menu-icon {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 1.2rem;
+  color: #bbb;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.menu-icon:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 30px;
+  right: 8px;
+  background: #2e2e2e;
+  border: 1px solid #555;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  min-width: 120px;
+}
+
+.dropdown-item {
+  padding: 8px 12px;
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.9rem;
+  color: #e0e0e0;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background: #3a3a3a;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .note-item {
+    width: 100%;
+    max-width: 300px;
+  }
+}

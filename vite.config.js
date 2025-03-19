@@ -14,11 +14,11 @@ export default defineConfig({
     fs: {
       strict: true,
     },
+    host: '0.0.0.0', // Позволяет внешний доступ
+    port: 5173, // Убедитесь, что это ваш целевой порт
     allowedHosts: [
-      'ad3a-195-158-193-250.ngrok-free.app', // Add the new ngrok URL here
       'localhost',
+      '.ngrok-free.app', // Разрешает все поддомены ngrok
     ],
-    host: '0.0.0.0', // Allows external access
-    port: 5173, // Ensure this matches your intended port
   },
 });

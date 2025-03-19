@@ -25,8 +25,6 @@ const Layout = ({ dashboard, todo, notes, pomadoro, settings }) => {
         return notes;
       case "pomadoro":
         return pomadoro;
-      case "settings":
-        return settings;
       default:
         return <h1>Страница не найдена</h1>;
     }

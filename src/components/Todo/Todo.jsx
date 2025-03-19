@@ -97,7 +97,6 @@ const Todo = () => {
 
   return (
     <div className="todo-container">
-      {/* Поле для поиска с иконкой и кнопкой очистки */}
       <div className="search-bar">
         <div className="search-wrapper">
           <IoSearch className="search-icon" />
@@ -132,8 +131,6 @@ const Todo = () => {
           ))}
         </div>
       </DragDropContext>
-
-      {/* Сообщение, если ничего не найдено */}
       {filteredTasks.length === 0 && searchQuery && (
         <div className="no-results">Ничего не найдено</div>
       )}
