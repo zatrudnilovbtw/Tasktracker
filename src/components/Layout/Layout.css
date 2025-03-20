@@ -142,6 +142,7 @@
   color: #fff;
   transition: margin-left 0.3s ease;
   min-width: 0;
+  overflow-y: auto; /* Добавляем прокрутку для основного контента */
 }
 
 @media (max-width: 48rem) {
