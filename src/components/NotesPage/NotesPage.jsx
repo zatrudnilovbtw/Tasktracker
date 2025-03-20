@@ -5,7 +5,7 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import NoteItem from "../NoteItem/NoteItem";
 import "./NotesPage.css";
 
-const NotesPage = ({ notes, setNotes, onEdit, onDelete }) => {
+const NotesPage = ({ notes, setNotes }) => { // Убраны onEdit и onDelete из пропсов, так как они будут внутри
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [newTitle, setNewTitle] = useState("");
   const [newContent, setNewContent] = useState("");
@@ -19,6 +19,18 @@ const NotesPage = ({ notes, setNotes, onEdit, onDelete }) => {
     setNewTitle("");
     setNewContent("");
     setNewColor("#333");
+  };
+
+  const handleEdit = (note) => {
+    setIsFormOpen(true);
+    setEditNoteId(note.id);
+    setNewTitle(note.title);
+    setNewContent(note.content);
+    setNewColor(note.color);
+  };
+
+  const handleDelete = (id) => {
+    setNotes((prev) => prev.filter((note) => note.id !== id));
   };
 
   const handleSaveNote = () => {
@@ -179,8 +191,8 @@ const NotesPage = ({ notes, setNotes, onEdit, onDelete }) => {
                     note={note}
                     toggleNote={toggleNote}
                     index={index}
-                    onEdit={onEdit}
-                    onDelete={onDelete}
+                    onEdit={handleEdit} // Передаем функцию handleEdit
+                    onDelete={handleDelete} // Передаем функцию handleDelete
                   />
                 ))
               ) : (
