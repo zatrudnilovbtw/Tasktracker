@@ -30,8 +30,8 @@ const NoteItem = ({ note, toggleNote, index, onEdit, onDelete }) => {
 
   const handleDelete = (e) => {
     e.stopPropagation();
-    console.log("Deleting note with id:", note.id); // Добавляем лог для проверки
-    onDelete(note.id); // Передаем id заметки
+    console.log("Deleting note with id:", note.id);
+    onDelete(note.id);
     setIsMenuOpen(false);
   };
 
@@ -41,6 +41,27 @@ const NoteItem = ({ note, toggleNote, index, onEdit, onDelete }) => {
     return lines[0] || "Нет текста";
   };
 
+  const renderContent = (text) => {
+    if (!text) return "Нет текста";
+    const urlPattern = /(https?:\/\/[^\s]+)/g;
+    return text.split(urlPattern).map((part, index) => {
+      if (part.match(urlPattern)) {
+        return (
+          <a
+            key={index}
+            href={part}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {part}
+          </a>
+        );
+      }
+      return part;
+    });
+  };
+
   return (
     <Draggable draggableId={note.id} index={index}>
       {(provided) => (
@@ -48,13 +69,18 @@ const NoteItem = ({ note, toggleNote, index, onEdit, onDelete }) => {
           className={`note-item ${note.isExpanded ? "expanded" : ""}`}
           ref={provided.innerRef}
           {...provided.draggableProps}
-          {...provided.dragHandleProps}
           style={{ borderColor: note.color, ...provided.draggableProps.style }}
         >
-          <div className="note-header" onClick={() => toggleNote(note.id)}>
+          {/* Заголовок — область для перетаскивания */}
+          <div
+            className="note-header"
+            {...provided.dragHandleProps} // Перетаскивание только за заголовок
+            onClick={() => toggleNote(note.id)}
+          >
             <h3>{note.title}</h3>
             <span>{new Date(note.createdAt).toLocaleDateString()}</span>
           </div>
+
           <BsThreeDotsVertical className="menu-icon" onClick={handleMenuToggle} />
           {isMenuOpen && (
             <div className="dropdown-menu" ref={menuRef}>
@@ -66,16 +92,19 @@ const NoteItem = ({ note, toggleNote, index, onEdit, onDelete }) => {
               </div>
             </div>
           )}
+
+          {/* Контент заметки — свободен для выделения */}
           {!note.isExpanded && (
-            <div className="note-preview">
-              <p>{getFirstLine(note.content)}</p>
+            <div className="note-preview" style={{ userSelect: "text" }}>
+              <p>{renderContent(getFirstLine(note.content))}</p>
             </div>
           )}
           {note.isExpanded && (
-            <div className="note-content">
-              <p>{note.content || "Нет текста"}</p>
+            <div className="note-content" style={{ userSelect: "text" }}>
+              <p>{renderContent(note.content)}</p>
             </div>
           )}
+
           <div className="toggle-icon" onClick={() => toggleNote(note.id)}>
             {note.isExpanded ? <RiCollapseDiagonal2Line /> : <RiExpandDiagonal2Line />}
           </div>

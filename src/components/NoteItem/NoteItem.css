@@ -164,3 +164,29 @@
     right: 4px;
   }
 }
+/* NoteItem.css */
+.note-preview,
+.note-content {
+  user-select: text; /* Разрешаем выделение текста */
+  -webkit-user-select: text; /* Для Safari */
+  -moz-user-select: text; /* Для Firefox */
+  -ms-user-select: text; /* Для IE */
+}
+
+.note-preview p,
+.note-content p {
+  margin: 0;
+  padding: 5px;
+}
+
+.note-content a,
+.note-preview a {
+  color: #007bff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.note-content a:hover,
+.note-preview a:hover {
+  color: #0056b3;
+}
