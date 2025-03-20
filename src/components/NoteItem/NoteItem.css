@@ -1,3 +1,10 @@
+.notes-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: flex-start; /* Каждый элемент имеет свою высоту */
+}
+
 .note-item {
   width: 220px;
   padding: 12px;
@@ -10,11 +17,12 @@
   color: #e0e0e0;
   transition: transform 0.2s ease, border-color 0.2s ease, height 0.3s ease;
   position: relative;
-  height: 120px;
+  height: 120px; /* Фиксированная высота для свернутого состояния */
 }
 
 .note-item.expanded {
-  height: auto;
+  height: auto; /* Высота подстраивается под содержимое */
+  min-height: 120px; /* Минимальная высота, чтобы не сжиматься меньше свернутого состояния */
 }
 
 .note-item.draggable-source--is-dragging {
