@@ -21,9 +21,9 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  max-width: 600px; /* Ограничиваем ширину для лучшего вида */
-  width: 100%; /* Занимаем всю доступную ширину внутри .main-content */
-  margin: 0 auto; /* Центрируем внутри .main-content */
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
   background: #222;
   font-family: "Roboto Mono", monospace;
   color: #e0e0e0;
@@ -32,11 +32,36 @@ body {
   padding: 20px;
 }
 
-/* На мобильных ничего не меняем */
 @media (max-width: 48rem) {
   .timer-container {
-    max-width: 100%; /* На мобильных занимаем всю ширину */
+    max-width: 100%;
     padding: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .timer-container {
+    padding: 8px;
+    padding-top: 60px;
+  }
+
+  .button-group {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .progress {
+    width: 100%;
+  }
+
+  .timer {
+    font-size: 64px; /* Уменьшаем для компактности */
+    padding: 10px 20px;
+  }
+
+  .button {
+    padding: 10px 20px;
+    font-size: 14px;
   }
 }
 
@@ -127,7 +152,6 @@ body {
   transform: scale(0.95);
 }
 
-/* Модальное окно */
 .modal {
   position: fixed;
   top: 0;
@@ -226,7 +250,6 @@ body {
   background: #777;
 }
 
-/* Счетчик циклов */
 .cycle-counter {
   margin-top: 20px;
   padding: 10px 20px;
@@ -249,7 +272,6 @@ body {
   color: #fff;
 }
 
-/* Анимации */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }

@@ -4,15 +4,15 @@ import { FaRegClipboard } from "react-icons/fa";
 import { CgNotes } from "react-icons/cg";
 import { GrTask } from "react-icons/gr";
 import { TfiTimer } from "react-icons/tfi";
-import { IoMenu } from "react-icons/io5"; // Иконка бургера
+import { IoMenu, IoClose } from "react-icons/io5"; // Добавляем IoClose
 
 const Layout = ({ dashboard, todo, notes, pomadoro, settings }) => {
-  const [activePage, setActivePage] = useState("dashboard"); // Начальное значение "dashboard"
+  const [activePage, setActivePage] = useState("dashboard");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handlePageChange = (page) => {
     setActivePage(page);
-    setIsSidebarOpen(false); // Закрываем сайдбар при выборе страницы
+    setIsSidebarOpen(false);
   };
 
   const renderContent = () => {
@@ -36,12 +36,16 @@ const Layout = ({ dashboard, todo, notes, pomadoro, settings }) => {
         className="sidebar-toggle"
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
       >
-        <IoMenu size={24} />
+        {isSidebarOpen ? <IoClose size={23} /> : <IoMenu size={23} />}
       </button>
-      <aside className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
+      <aside
+        className={`sidebar ${isSidebarOpen ? "open" : ""}`}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) setIsSidebarOpen(false);
+        }}
+      >
         <h2>TrackIT</h2>
         <p>сайт в бета тесте</p>
-        
         <ul>
           <li onClick={() => handlePageChange("dashboard")}>
             <span className="icon">

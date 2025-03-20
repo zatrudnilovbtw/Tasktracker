@@ -51,7 +51,7 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
-  min-width: 0; /* Предотвращаем переполнение текста */
+  min-width: 0;
 }
 
 .task-text-input {
@@ -79,8 +79,9 @@
   align-items: center;
   font-size: 0.8rem;
   color: #bbb;
-  flex-wrap: wrap; /* Разрешаем перенос на узких экранах */
+  flex-wrap: wrap;
   gap: 5px;
+  padding-right: 40px; /* Отступ справа для .icon-delete */
 }
 
 .task-deadline-container,
@@ -113,7 +114,7 @@
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  min-width: 60px; /* Устанавливаем минимальную ширину */
+  min-width: 60px;
   height: 20px;
   display: flex;
   align-items: center;
@@ -151,7 +152,7 @@
   flex-direction: column;
   gap: 5px;
   z-index: 10;
-  width: max-content; /* Адаптируем ширину под содержимое */
+  width: max-content;
 }
 
 .task-actions {
@@ -179,14 +180,17 @@
 }
 
 .drag-handle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
   cursor: grab;
   display: flex;
   align-items: center;
   padding: 4px;
-  flex-shrink: 0;
   background: #2e2e2e;
   border-radius: 4px;
   transition: background 0.2s ease;
+  z-index: 2;
 }
 
 .drag-handle:hover {
@@ -213,31 +217,78 @@
 
 @media (max-width: 768px) {
   .task-item {
-    padding: 10px;
+    padding: 8px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding-top: 30px;
+  }
+
+  .task-checkbox {
+    width: 16px;
+    height: 16px;
+    margin-bottom: 4px;
+  }
+
+  .task-content {
+    flex-direction: column;
+    gap: 4px;
   }
 
   .task-text-input {
     font-size: 0.9rem;
+    padding: 2px;
   }
 
   .task-details {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 6px;
+    padding-right: 30px; /* Уменьшаем отступ для мобильных */
   }
 
   .task-deadline-container,
   .task-priority {
-    width: 100%;
-    text-align: center;
+    width: auto;
+    padding: 3px 6px;
+    font-size: 0.7rem;
+  }
+
+  .task-actions {
+    justify-content: flex-end;
+    gap: 4px;
+  }
+
+  .icon-delete {
+    font-size: 1.2rem;
+    bottom: 4px;
+    right: 4px;
+  }
+
+  .drag-handle {
+    top: 8px;
+    right: 8px;
+    padding: 3px;
+  }
+
+  .icon-drag {
+    font-size: 0.9rem;
   }
 }
 
 @media (max-height: 600px) {
   .task-item {
-    padding: 8px;
+    padding: 6px;
+    padding-top: 28px;
   }
 
   .icon-delete {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
+  }
+
+  .drag-handle {
+    top: 6px;
+    right: 6px;
   }
 }

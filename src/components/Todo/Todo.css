@@ -2,19 +2,20 @@
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 10px; /* Добавляем отступы для узких экранов */
+  padding: 0 10px;
   box-sizing: border-box;
-  min-height: 100vh; /* Устанавливаем минимальную высоту для вертикальных экранов */
+  min-height: 100vh;
 }
 
 .category-section {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  gap: 2vw; /* Относительный отступ между колонками */
+  gap: 2vw;
   padding: 20px 0;
   width: 100%;
-  flex-wrap: wrap; /* Разрешаем перенос колонок на маленьких экранах */
+  flex-wrap: wrap;
+  min-height: 0;
 }
 
 .loading {
@@ -23,14 +24,13 @@
   padding: 20px;
 }
 
-/* Стили для строки поиска */
 .search-bar {
   margin-bottom: 20px;
   width: 100%;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
-  padding: 0 1rem; /* Относительные отступы */
+  padding: 0 1rem;
 }
 
 .search-wrapper {
@@ -87,34 +87,47 @@
 }
 
 @media (max-width: 768px) {
-  .category-section {
-    flex-direction: column;
-    gap: 20px;
+  .todo-container {
+    padding: 8px;
+    padding-top: 60px; /* Отступ для бургер-меню */
+    overflow-y: auto; /* Прокрутка всего контейнера */
   }
 
   .search-bar {
+    padding: 0 5px;
     max-width: 100%;
-    padding: 0 10px;
   }
 
   .search-input {
-    font-size: 0.9rem;
-    padding: 8px 12px 8px 30px;
+    font-size: 0.9rem; /* Уменьшаем шрифт для компактности */
+    padding: 8px 12px 8px 32px;
   }
 
   .search-icon,
   .clear-icon {
-    font-size: 1rem;
+    font-size: 1rem; /* Уменьшаем иконки */
+  }
+
+  .category-section {
+    flex-direction: column;
+    gap: 20px; /* Увеличиваем зазор между категориями */
+    padding: 10px 0;
+    height: auto;
+  }
+
+  .category-section > * {
+    width: 100%;
+    min-width: 0;
   }
 }
 
 @media (max-height: 600px) {
-  /* Для вертикальных экранов с малой высотой */
   .todo-container {
-    padding: 10px;
+    padding: 8px;
+    overflow-y: auto;
   }
 
   .category-section {
-    padding: 10px 0;
+    padding: 8px 0;
   }
 }

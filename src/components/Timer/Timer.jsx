@@ -30,6 +30,12 @@ const PomodoroTimer = () => {
 
     timerManager.subscribe(updateState);
 
+    // Set favicon dynamically if needed
+    const link = document.querySelector("link[rel='icon']") || document.createElement("link");
+    link.rel = "icon";
+    link.href = "/icon.ico";
+    document.head.appendChild(link);
+
     return () => {
       timerManager.unsubscribe(updateState);
       document.title = "Pomodoro Timer"; // Reset title on unmount
@@ -58,7 +64,7 @@ const PomodoroTimer = () => {
     const validatedBreakTime = validateAndSetTime(timerState.breakTime, 300);
     timerManager.setWorkTime(validatedWorkTime);
     timerManager.setBreakTime(validatedBreakTime);
-    timerManager.setVolume(timerState.volume);
+    timerManager.setVolume(timerState.volume); // Ensure volume is saved
     setIsSettingsOpen(false);
   };
 
@@ -88,6 +94,12 @@ const PomodoroTimer = () => {
     if (timerState.breakTime === "" || isNaN(timerState.breakTime) || timerState.breakTime < 60) {
       setTimerState((prev) => ({ ...prev, breakTime: 300 }));
     }
+  };
+
+  const handleVolumeChange = (e) => {
+    const newVolume = parseFloat(e.target.value);
+    setTimerState((prev) => ({ ...prev, volume: newVolume }));
+    timerManager.setVolume(newVolume); // Update volume in timerManager immediately
   };
 
   const progress = useMemo(
@@ -161,7 +173,7 @@ const PomodoroTimer = () => {
                 max="1"
                 step="0.1"
                 value={timerState.volume}
-                onChange={(e) => setTimerState((prev) => ({ ...prev, volume: parseFloat(e.target.value) }))}
+                onChange={handleVolumeChange} // Update volume immediately
                 className="volume-slider"
               />
             </div>

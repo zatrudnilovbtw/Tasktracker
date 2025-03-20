@@ -1,11 +1,9 @@
-/* Общие стили контейнера */
 .layout-container {
   display: flex;
   min-height: 100vh;
   background: #1e1e1e;
 }
 
-/* Сайдбар */
 .sidebar {
   width: 250px;
   position: fixed;
@@ -21,27 +19,47 @@
   overflow: hidden;
 }
 
-/* Кнопка бургера */
+.sidebar::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.sidebar.open::after {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .sidebar-toggle {
   display: none;
   position: fixed;
-  top: 10px;
-  left: 10px;
+  top: 15px; /* Чуть ниже для симметрии */
+  left: 15px; /* Отступ от края */
   z-index: 20;
-  background: #444;
-  border: none;
-  padding: 8px;
-  border-radius: 4px;
+  background: none; /* Убираем фон */
+  padding: 0; /* Убираем внутренние отступы */
+  border: none; /* Убираем обводку */
   cursor: pointer;
-  color: #fff;
-  transition: background 0.2s ease;
+  color: #fff; /* Цвет иконки */
+  transition: left 0.3s ease, transform 0.2s ease; /* Плавный переход для позиции и эффекта */
 }
 
 .sidebar-toggle:hover {
-  background: #555;
+  transform: scale(1.1); /* Легкое увеличение при наведении */
 }
 
-/* Медиа-запрос для мобильных */
+.sidebar.open ~ .sidebar-toggle {
+  left: 260px; /* Смещение при открытой панели */
+}
+
 @media (max-width: 48rem) {
   .sidebar {
     width: 250px;
@@ -58,16 +76,22 @@
 
   .main-content {
     margin-left: 0;
+    padding-top: 60px;
+  }
+
+  .sidebar h2 {
+    padding-left: 50px;
   }
 }
 
-/* Остальные стили сайдбара */
 .sidebar h2 {
   margin-bottom: 1.5625rem;
   font-size: 1.6rem;
   font-weight: 600;
   letter-spacing: 0.0625rem;
   white-space: nowrap;
+  text-align: center;
+  padding-left: 20px;
 }
 
 .sidebar ul {
@@ -106,18 +130,13 @@
   margin-bottom: 1px;
 }
 
-.sidebar li:hover .icon {
-  color: #00ccff;
-}
-
 .sidebar li span:not(.icon) {
   font-size: 1rem;
   line-height: 1;
 }
 
-/* Основной контент */
 .main-content {
-  margin-left: 250px; /* Устанавливаем отступ равный ширине сайдбара */
+  margin-left: 250px;
   flex: 1;
   background: #222;
   color: #fff;
@@ -138,11 +157,10 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.sidebar li:focus {
-  outline: none;
-  box-shadow: 0 0 0 0.125rem rgba(0, 204, 255, 0.5);
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

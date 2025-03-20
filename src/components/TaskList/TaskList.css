@@ -1,8 +1,8 @@
 .category-container {
   flex: 1;
   min-width: 300px;
-  max-width: 100%; /* Убираем жесткий лимит для адаптивности */
-  width: 100%; /* Полная ширина на узких экранах */
+  max-width: 100%;
+  width: 100%;
   box-sizing: border-box;
 }
 
@@ -23,8 +23,8 @@
 .kanban-column {
   padding: 10px;
   border-radius: 6px;
-  min-height: 200px; /* Уменьшаем минимальную высоту для вертикальных экранов */
-  max-height: 80vh; /* Ограничиваем высоту относительно экрана */
+  min-height: 150px; /* Уменьшаем минимальную высоту */
+  max-height: 70vh; /* Ограничиваем высоту */
   overflow-y: auto;
   overflow-x: hidden;
   width: 100%;
@@ -102,7 +102,7 @@
 .task-form-actions {
   display: flex;
   gap: 10px;
-  flex-wrap: wrap; /* Разрешаем перенос кнопок на узких экранах */
+  flex-wrap: wrap;
 }
 
 .task-form-actions button {
@@ -113,7 +113,7 @@
   cursor: pointer;
   transition: all 0.2s ease;
   font-weight: 500;
-  min-width: 80px; /* Минимальная ширина кнопок */
+  min-width: 80px;
 }
 
 .task-form-actions button:first-child {
@@ -141,15 +141,39 @@
 @media (max-width: 768px) {
   .category-container {
     min-width: 100%;
+    margin-bottom: 20px; /* Отступ между категориями */
   }
 
   .kanban-column {
-    max-height: none;
+    max-height: 50vh; /* Ограничиваем высоту на мобильных */
+    min-height: 120px;
+  }
+
+  .add-task-button {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+
+  .task-form {
+    padding: 10px;
+  }
+
+  .task-form textarea,
+  .task-form input,
+  .task-form select {
+    padding: 8px 10px;
+    font-size: 0.9rem;
+    min-height: 36px;
+  }
+
+  .task-form-actions button {
+    padding: 8px;
+    font-size: 0.9rem;
   }
 }
 
 @media (max-height: 600px) {
   .kanban-column {
-    max-height: 60vh; /* Уменьшаем высоту для вертикальных экранов */
+    max-height: 40vh; /* Еще больше уменьшаем высоту */
   }
 }

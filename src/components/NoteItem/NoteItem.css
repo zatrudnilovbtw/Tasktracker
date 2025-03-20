@@ -144,6 +144,23 @@
 @media (max-width: 768px) {
   .note-item {
     width: 100%;
-    max-width: 300px;
+    max-width: 280px;
+    height: auto;
+    padding: 8px;
+  }
+
+  .note-header h3 {
+    font-size: 1rem;
+  }
+
+  .note-preview p {
+    font-size: 0.85rem;
+  }
+
+  .toggle-icon,
+  .menu-icon {
+    font-size: 1rem;
+    bottom: 4px;
+    right: 4px;
   }
 }

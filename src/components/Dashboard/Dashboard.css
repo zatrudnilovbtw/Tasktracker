@@ -1,138 +1,130 @@
-/* Общие стили для контейнера Dashboard */
 .dashboard-container {
-    padding: 20px;
-    color: #e0e0e0;
-    font-family: "Roboto Mono", monospace;
-    margin: 20px;
+  padding: 20px;
+  color: #e0e0e0;
+  font-family: "Roboto Mono", monospace;
+  margin: 20px;
+}
+
+.dashboard-container h1 {
+  font-size: 2rem;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.dashboard-content {
+  display: flex;
+  gap: 30px;
+}
+
+.task-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  padding: 15px;
+  max-width: 700px;
+  flex: 1;
+}
+
+.stats-text {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stats-text p {
+  font-size: 1.2rem;
+  background: #333;
+  padding: 10px;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.stats-text p:hover {
+  background: #444;
+}
+
+.pie-chart-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pie-chart-wrapper svg {
+  width: 180px;
+  height: 180px;
+}
+
+.pomodoro-progress {
+  flex: 1;
+  padding: 15px;
+}
+
+.pomodoro-progress h2 {
+  font-size: 1.5rem;
+  color: #ffffff;
+  margin-bottom: 15px;
+}
+
+.pomodoro-widget {
+  text-align: center;
+}
+
+.pomodoro-widget p {
+  font-size: 1.2rem;
+  padding: 10px;
+  background: #333;
+  border-radius: 4px;
+  margin: 5px 0;
+  transition: background 0.2s ease;
+}
+
+.pomodoro-widget p:hover {
+  background: #444;
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 15px;
+    margin: 10px;
+    padding-top: 60px;
   }
-  
-  /* Заголовок */
+
   .dashboard-container h1 {
-    font-size: 2rem;
-    color: #ffffff;
-    margin-bottom: 20px;
-  }
-  
-  /* Контейнер для контента */
-  .dashboard-content {
-    display: flex;
-    gap: 30px; /* Расстояние между секциями */
-  }
-  
-  /* Стили для секции статистики */
-  .task-stats {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 30px;
-    padding: 15px;
-    max-width: 700px;
-    flex: 1; /* Занимает доступное пространство */
-  }
-  
-  /* Текст статистики */
-  .stats-text {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .stats-text p {
-    font-size: 1.2rem;
-    background: #333;
-    padding: 10px;
-    border-radius: 4px;
-    transition: background 0.2s ease;
-  }
-  
-  .stats-text p:hover {
-    background: #444;
-  }
-  
-  /* Обёртка для диаграммы */
-  .pie-chart-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .pie-chart-wrapper svg {
-    width: 180px;
-    height: 180px;
-  }
-  
-  /* Стили для секции Помодоро */
-  .pomodoro-progress {
-    flex: 1; /* Занимает доступное пространство */
-    padding: 15px;
-   
-  }
-  
-  .pomodoro-progress h2 {
     font-size: 1.5rem;
-    color: #ffffff;
-    margin-bottom: 15px;
   }
-  
-  .pomodoro-widget {
-    text-align: center;
+
+  .dashboard-content {
+    flex-direction: column;
+    gap: 20px;
   }
-  
-  .pomodoro-widget p {
-    font-size: 1.2rem;
+
+  .task-stats {
+    flex-direction: column;
+    gap: 15px;
     padding: 10px;
-    background: #333;
-    border-radius: 4px;
-    margin: 5px 0;
-    transition: background 0.2s ease;
   }
-  
-  .pomodoro-widget p:hover {
-    background: #444;
+
+  .stats-text p {
+    font-size: 1rem;
+    padding: 8px;
   }
-  
-  /* Адаптивные стили */
-  @media (max-width: 768px) {
-    .dashboard-container {
-      padding: 15px;
-      margin: 10px;
-    }
-  
-    .dashboard-container h1 {
-      font-size: 1.5rem;
-    }
-  
-    .dashboard-content {
-      flex-direction: column; /* Вертикальное расположение на мобильных */
-      gap: 20px;
-    }
-  
-    .task-stats {
-      flex-direction: column;
-      gap: 15px;
-      padding: 10px;
-    }
-  
-    .stats-text p {
-      font-size: 1rem;
-      padding: 8px;
-    }
-  
-    .pie-chart-wrapper svg {
-      width: 150px;
-      height: 150px;
-    }
-  
-    .pomodoro-progress {
-      padding: 10px;
-    }
-  
-    .pomodoro-progress h2 {
-      font-size: 1.2rem;
-    }
-  
-    .pomodoro-widget p {
-      font-size: 1rem;
-      padding: 8px;
-    }
+
+  .pie-chart-wrapper svg {
+    width: 150px;
+    height: 150px;
   }
+
+  .pomodoro-progress {
+    padding: 10px;
+  }
+
+  .pomodoro-progress h2 {
+    font-size: 1.2rem;
+  }
+
+  .pomodoro-widget p {
+    font-size: 1rem;
+    padding: 8px;
+  }
+}
