@@ -44,22 +44,28 @@ const NoteItem = ({ note, toggleNote, index, onEdit, onDelete }) => {
   const renderContent = (text) => {
     if (!text) return "Нет текста";
     const urlPattern = /(https?:\/\/[^\s]+)/g;
-    return text.split(urlPattern).map((part, index) => {
-      if (part.match(urlPattern)) {
-        return (
-          <a
-            key={index}
-            href={part}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {part}
-          </a>
-        );
-      }
-      return part;
-    });
+    // Разделяем текст по переносам строк и URL
+    return text.split("\n").map((line, lineIndex) => (
+      <span key={lineIndex}>
+        {line.split(urlPattern).map((part, index) => {
+          if (part.match(urlPattern)) {
+            return (
+              <a
+                key={`${lineIndex}-${index}`}
+                href={part}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {part}
+              </a>
+            );
+          }
+          return part;
+        })}
+        {lineIndex < text.split("\n").length - 1 && <br />} {/* Добавляем перенос строки */}
+      </span>
+    ));
   };
 
   return (
@@ -71,10 +77,9 @@ const NoteItem = ({ note, toggleNote, index, onEdit, onDelete }) => {
           {...provided.draggableProps}
           style={{ borderColor: note.color, ...provided.draggableProps.style }}
         >
-          {/* Заголовок — область для перетаскивания */}
           <div
             className="note-header"
-            {...provided.dragHandleProps} // Перетаскивание только за заголовок
+            {...provided.dragHandleProps}
             onClick={() => toggleNote(note.id)}
           >
             <h3>{note.title}</h3>
@@ -93,7 +98,6 @@ const NoteItem = ({ note, toggleNote, index, onEdit, onDelete }) => {
             </div>
           )}
 
-          {/* Контент заметки — свободен для выделения */}
           {!note.isExpanded && (
             <div className="note-preview" style={{ userSelect: "text" }}>
               <p>{renderContent(getFirstLine(note.content))}</p>

@@ -48,6 +48,7 @@
 .note-preview {
   margin-top: 8px;
   padding: 0 8px;
+  white-space: pre-wrap; /* Сохраняет переносы строк и пробелы */
 }
 
 .note-preview p {
@@ -57,7 +58,7 @@
   opacity: 0.5;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: nowrap; /* Оставляем nowrap для превью, чтобы показывать только первую строку */
 }
 
 .note-content {
@@ -66,6 +67,7 @@
   background: #2e2e2e;
   border-radius: 4px;
   animation: fadeIn 0.3s ease-in-out;
+  white-space: pre-wrap; /* Сохраняет переносы строк и пробелы */
 }
 
 .note-content p {
@@ -164,10 +166,11 @@
     right: 4px;
   }
 }
-/* NoteItem.css */
+
+/* Разрешаем выделение текста */
 .note-preview,
 .note-content {
-  user-select: text; /* Разрешаем выделение текста */
+  user-select: text;
   -webkit-user-select: text; /* Для Safari */
   -moz-user-select: text; /* Для Firefox */
   -ms-user-select: text; /* Для IE */
