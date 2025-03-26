@@ -1,13 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Draggable } from "react-beautiful-dnd";
-import { IoClose, IoReorderThree } from "react-icons/io5";
-import "./TaskItem.css"; // Локальный CSS
+import { IoClose, IoReorderThree, IoCalendarOutline } from "react-icons/io5"; // Добавляем иконку календаря
+import "./TaskItem.css";
 
 const TaskItem = ({ task, toggleTask, editTask, deleteTask, index }) => {
   const [editText, setEditText] = useState(task.task);
   const [editDeadline, setEditDeadline] = useState(task.deadline || "");
   const [editPriority, setEditPriority] = useState(task.priority);
   const [showPriorityOptions, setShowPriorityOptions] = useState(false);
+  const [isEditingDeadline, setIsEditingDeadline] = useState(false); // Новое состояние для редактирования даты
   const textareaRef = useRef(null);
 
   const formatDate = (dateStr) => {
@@ -42,7 +43,24 @@ const TaskItem = ({ task, toggleTask, editTask, deleteTask, index }) => {
   const handleDeadlineChange = (e) => {
     const newDeadline = e.target.value;
     setEditDeadline(newDeadline);
-    editTask(task.id, { ...task, deadline: newDeadline || null });
+  };
+
+  const saveDeadline = () => {
+    editTask(task.id, { ...task, deadline: editDeadline || null });
+    setIsEditingDeadline(false); // Завершаем редактирование
+  };
+
+  const handleDeadlineBlur = () => {
+    saveDeadline();
+  };
+
+  const handleDeadlineKeyDown = (e) => {
+    if (e.key === "Enter") {
+      saveDeadline();
+    } else if (e.key === "Escape") {
+      setEditDeadline(task.deadline || ""); // Отмена изменений
+      setIsEditingDeadline(false);
+    }
   };
 
   const handlePriorityChange = (newPriority) => {
@@ -90,22 +108,25 @@ const TaskItem = ({ task, toggleTask, editTask, deleteTask, index }) => {
               autoFocus={editText !== task.task}
             />
             <div className="task-details">
-              <span
-                className="task-deadline-container"
-                onClick={() => setEditDeadline(editDeadline || "")}
-              >
-                {editDeadline ? (
+              <span className="task-deadline-container">
+                {isEditingDeadline ? (
                   <input
                     type="date"
                     value={editDeadline}
                     onChange={handleDeadlineChange}
-                    onBlur={() => {
-                      if (!editDeadline) setEditDeadline(task.deadline || "");
-                    }}
+                    onBlur={handleDeadlineBlur}
+                    onKeyDown={handleDeadlineKeyDown}
                     className="task-deadline-input"
+                    autoFocus
                   />
                 ) : (
-                  <span className="task-deadline add-date">Нет даты</span>
+                  <span
+                    className="task-deadline"
+                    onClick={() => setIsEditingDeadline(true)}
+                  >
+                    <IoCalendarOutline className="calendar-icon" />{" "}
+                    {formatDate(editDeadline)}
+                  </span>
                 )}
               </span>
               <div className="priority-container">

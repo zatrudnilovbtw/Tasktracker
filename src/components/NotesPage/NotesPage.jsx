@@ -67,12 +67,12 @@ const NotesPage = ({ notes, setNotes }) => { // Убраны onEdit и onDelete 
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === "Enter" && !e.ctrlKey) {
+    if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      handleSaveNote();
-    } else if (e.key === "Enter" && e.ctrlKey) {
+      handleSaveNote(); // Сохранение заметки при нажатии Enter
+    } else if (e.key === "Enter" && e.shiftKey) {
       e.preventDefault();
-      setNewContent((prev) => prev + "\n");
+      setNewContent((prev) => prev + "\n"); // Добавление новой строки при Shift + Enter
     }
   };
 
