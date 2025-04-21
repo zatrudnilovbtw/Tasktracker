@@ -30,7 +30,6 @@ const PomodoroTimer = () => {
 
     timerManager.subscribe(updateState);
 
-    // Set favicon dynamically if needed
     const link = document.querySelector("link[rel='icon']") || document.createElement("link");
     link.rel = "icon";
     link.href = "/icon.ico";
@@ -38,7 +37,7 @@ const PomodoroTimer = () => {
 
     return () => {
       timerManager.unsubscribe(updateState);
-      document.title = "Pomodoro Timer"; // Reset title on unmount
+      document.title = "Pomodoro Timer";
     };
   }, []);
 
@@ -48,7 +47,13 @@ const PomodoroTimer = () => {
     clickSound.play().catch((err) => console.error("Ошибка звука клика:", err));
   };
 
-  const message = timerState.mode === "work" ? "Time to focus" : "Time to chill";
+  const toggleMode = () => {
+    const newMode = timerState.mode === "work" ? "break" : "work";
+    timerManager.setMode(newMode);
+    playClickSound();
+  };
+
+  const message = timerState.mode === "work" ? "Время сосредоточиться" : "Время отдохнуть";
   const initialTime = useMemo(
     () => (timerState.mode === "work" ? timerState.workTime : timerState.breakTime),
     [timerState.mode, timerState.workTime, timerState.breakTime]
@@ -64,7 +69,7 @@ const PomodoroTimer = () => {
     const validatedBreakTime = validateAndSetTime(timerState.breakTime, 300);
     timerManager.setWorkTime(validatedWorkTime);
     timerManager.setBreakTime(validatedBreakTime);
-    timerManager.setVolume(timerState.volume); // Ensure volume is saved
+    timerManager.setVolume(timerState.volume);
     setIsSettingsOpen(false);
   };
 
@@ -99,7 +104,7 @@ const PomodoroTimer = () => {
   const handleVolumeChange = (e) => {
     const newVolume = parseFloat(e.target.value);
     setTimerState((prev) => ({ ...prev, volume: newVolume }));
-    timerManager.setVolume(newVolume); // Update volume in timerManager immediately
+    timerManager.setVolume(newVolume);
   };
 
   const progress = useMemo(
@@ -110,7 +115,7 @@ const PomodoroTimer = () => {
   return (
     <div className="timer-container">
       <p className="message">{message}</p>
-      <h1>Pomodoro Timer</h1>
+      <h1>Таймер Помодоро</h1>
       <div className="progress">
         <div className="progress-inner" style={{ width: `${progress}%` }}></div>
       </div>
@@ -119,30 +124,38 @@ const PomodoroTimer = () => {
         .padStart(2, "0")}`}</p>
       <div className="button-group">
         <button className="button" onClick={() => { playClickSound(); timerManager.start(); }}>
-          Start
+          Старт
         </button>
         <button className="button" onClick={() => { playClickSound(); timerManager.stop(); }}>
-          Stop
+          Стоп
         </button>
         <button className="button" onClick={() => { playClickSound(); timerManager.reset(); }}>
-          Reset
+          Сброс
         </button>
         <button className="settings-button" onClick={() => { playClickSound(); setIsSettingsOpen(true); }}>
-          <img src={SettingsIcon} alt="Settings" />
+          <img src={SettingsIcon} alt="Настройки" />
+        </button>
+      </div>
+      <div className="mode-toggle">
+        <button
+          className="button mode-button"
+          onClick={toggleMode}
+        >
+          {timerState.mode === "work" ? "Перейти к отдыху" : "Перейти к фокусу"}
         </button>
       </div>
       <div className="cycle-counter">
-        <p className="completed">Completed Cycles: {timerState.cycleCount}</p>
+        <p className="completed">Завершено циклов: {timerState.cycleCount}</p>
         <button className="button-cycle" onClick={() => { playClickSound(); timerManager.resetCycles(); }}>
-          Reset Cycles
+          Сбросить циклы
         </button>
       </div>
       {isSettingsOpen && (
         <div className="modal" onClick={() => setIsSettingsOpen(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h2>Timer Settings</h2>
+            <h2>Настройки таймера</h2>
             <div className="settings-row">
-              <label>Work Time (min):</label>
+              <label>Время работы (мин):</label>
               <input
                 type="number"
                 value={timerState.workTime === "" ? "" : timerState.workTime / 60}
@@ -154,7 +167,7 @@ const PomodoroTimer = () => {
               />
             </div>
             <div className="settings-row">
-              <label>Break Time (min):</label>
+              <label>Время отдыха (мин):</label>
               <input
                 type="number"
                 value={timerState.breakTime === "" ? "" : timerState.breakTime / 60}
@@ -166,23 +179,23 @@ const PomodoroTimer = () => {
               />
             </div>
             <div className="settings-row">
-              <label>Volume:</label>
+              <label>Громкость:</label>
               <input
                 type="range"
                 min="0"
                 max="1"
                 step="0.1"
                 value={timerState.volume}
-                onChange={handleVolumeChange} // Update volume immediately
+                onChange={handleVolumeChange}
                 className="volume-slider"
               />
             </div>
             <div className="modal-buttons">
               <button className="save-button" onClick={handleSaveSettings}>
-                Save
+                Сохранить
               </button>
               <button className="close-button" onClick={() => setIsSettingsOpen(false)}>
-                Cancel
+                Отмена
               </button>
             </div>
           </div>

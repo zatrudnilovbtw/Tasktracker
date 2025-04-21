@@ -50,7 +50,20 @@ class TimerManager {
     const minutes = Math.floor(this.seconds / 60);
     const seconds = this.seconds % 60;
     const timeString = `${minutes}:${seconds.toString().padStart(2, "0")}`;
-    document.title = `${timeString} - ${this.mode === "work" ? "Work" : "Break"}`;
+    document.title = `${timeString} - ${this.mode === "work" ? "Работа" : "Отдых"}`;
+  }
+
+  setMode(newMode) {
+    if (this.mode !== newMode && (newMode === "work" || newMode === "break")) {
+      this.mode = newMode;
+      this.seconds = newMode === "work" ? this.workTime : this.breakTime;
+      if (this.isRunning) {
+        this.stop();
+      }
+      this.saveToStorage();
+      this.notify();
+      this.updateTitle();
+    }
   }
 
   start() {
@@ -70,7 +83,7 @@ class TimerManager {
     }
     this.saveToStorage();
     this.notify();
-    this.updateTitle(); // Update title when stopped
+    this.updateTitle();
   }
 
   reset() {
@@ -82,7 +95,7 @@ class TimerManager {
     }
     this.saveToStorage();
     this.notify();
-    this.updateTitle(); // Update title when reset
+    this.updateTitle();
   }
 
   setWorkTime(time) {
@@ -90,7 +103,7 @@ class TimerManager {
     if (this.mode === "work" && !this.isRunning) this.seconds = time;
     this.saveToStorage();
     this.notify();
-    this.updateTitle(); // Update title when work time changes
+    this.updateTitle();
   }
 
   setBreakTime(time) {
@@ -98,7 +111,7 @@ class TimerManager {
     if (this.mode === "break" && !this.isRunning) this.seconds = time;
     this.saveToStorage();
     this.notify();
-    this.updateTitle(); // Update title when break time changes
+    this.updateTitle();
   }
 
   setVolume(volume) {
@@ -138,7 +151,7 @@ class TimerManager {
     }
     this.saveToStorage();
     this.notify();
-    this.updateTitle(); // Update title every tick
+    this.updateTitle();
   }
 }
 
