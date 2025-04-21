@@ -4,9 +4,10 @@ import { FaRegClipboard } from "react-icons/fa";
 import { CgNotes } from "react-icons/cg";
 import { GrTask } from "react-icons/gr";
 import { TfiTimer } from "react-icons/tfi";
+import { SlPencil } from "react-icons/sl";
 import { IoMenu, IoClose } from "react-icons/io5"; // Добавляем IoClose
 
-const Layout = ({ dashboard, todo, notes, pomadoro, settings }) => {
+const Layout = ({ dashboard, todo, notes, pomadoro, desk }) => {
   const [activePage, setActivePage] = useState("dashboard");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -23,6 +24,8 @@ const Layout = ({ dashboard, todo, notes, pomadoro, settings }) => {
         return todo;
       case "notes":
         return notes;
+      case "desk":
+        return desk;
       case "pomadoro":
         return pomadoro;
       default:
@@ -45,7 +48,6 @@ const Layout = ({ dashboard, todo, notes, pomadoro, settings }) => {
         }}
       >
         <h2>TrackIT</h2>
-        <p>сайт в бета тесте</p>
         <ul>
           <li onClick={() => handlePageChange("dashboard")}>
             <span className="icon">
@@ -60,6 +62,11 @@ const Layout = ({ dashboard, todo, notes, pomadoro, settings }) => {
           <li onClick={() => handlePageChange("notes")}>
             <span className="icon">
               <CgNotes /> Notes
+            </span>
+          </li>
+          <li onClick={() => handlePageChange("desk")}>
+            <span className="icon">
+            <SlPencil /> Whiteboard
             </span>
           </li>
           <li onClick={() => handlePageChange("pomadoro")}>

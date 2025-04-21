@@ -4,6 +4,7 @@ import Todo from "./components/Todo/Todo";
 import Dashboard from "./components/Dashboard/Dashboard";
 import PomodoroTimer from "./components/Timer/Timer";
 import NotesPage from "./components/NotesPage/NotesPage";
+import Desk from "./components/Desk/Desk";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -41,8 +42,8 @@ function App() {
       dashboard={<Dashboard />}
       todo={<Todo />}
       notes={<NotesPage notes={notes} setNotes={setNotes} onEdit={handleEdit} onDelete={handleDelete} />}
+      desk={<Desk />}
       pomadoro={<PomodoroTimer />}
-      settings={<h1>Настройки (в разработке)</h1>}
     />
   );
 }
