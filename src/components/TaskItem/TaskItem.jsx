@@ -7,6 +7,7 @@ const TaskItem = ({ task, toggleTask, editTask, deleteTask, index }) => {
   const [editText, setEditText] = useState(task.task);
   const [editDeadline, setEditDeadline] = useState(task.deadline || "");
   const [editPriority, setEditPriority] = useState(task.priority);
+  const priorityClassMap = { "Высокий": "high", "Средний": "medium", "Низкий": "low" };
   const [showPriorityOptions, setShowPriorityOptions] = useState(false);
   const [isEditingDeadline, setIsEditingDeadline] = useState(false); // Новое состояние для редактирования даты
   const textareaRef = useRef(null);
@@ -131,19 +132,19 @@ const TaskItem = ({ task, toggleTask, editTask, deleteTask, index }) => {
               </span>
               <div className="priority-container">
                 <span
-                  className={`task-priority priority-${editPriority.toLowerCase()}`}
+                  className={`task-priority priority-${priorityClassMap[editPriority] || editPriority.toLowerCase()}`}
                   onClick={() => setShowPriorityOptions(!showPriorityOptions)}
                 >
                   {editPriority}
                 </span>
                 {showPriorityOptions && (
                   <div className="priority-options">
-                    {["High", "Medium", "Low"]
+                    {["Высокий", "Средний", "Низкий"]
                       .filter((p) => p !== editPriority)
                       .map((priority) => (
                         <span
                           key={priority}
-                          className={`task-priority priority-${priority.toLowerCase()}`}
+                          className={`task-priority priority-${priorityClassMap[priority]}`}
                           onClick={() => handlePriorityChange(priority)}
                         >
                           {priority}

@@ -122,27 +122,29 @@ const PomodoroTimer = () => {
       <p className="timer">{`${Math.floor(timerState.seconds / 60)}:${(timerState.seconds % 60)
         .toString()
         .padStart(2, "0")}`}</p>
-      <div className="button-group">
-        <button className="button" onClick={() => { playClickSound(); timerManager.start(); }}>
-          Старт
-        </button>
-        <button className="button" onClick={() => { playClickSound(); timerManager.stop(); }}>
-          Стоп
-        </button>
-        <button className="button" onClick={() => { playClickSound(); timerManager.reset(); }}>
-          Сброс
-        </button>
-        <button className="settings-button" onClick={() => { playClickSound(); setIsSettingsOpen(true); }}>
-          <img src={SettingsIcon} alt="Настройки" />
-        </button>
-      </div>
-      <div className="mode-toggle">
-        <button
-          className="button mode-button"
-          onClick={toggleMode}
-        >
-          {timerState.mode === "work" ? "Перейти к отдыху" : "Перейти к фокусу"}
-        </button>
+      <div className="controls-wrapper">
+        <div className="button-group">
+          <button className="button" onClick={() => { playClickSound(); timerManager.start(); }}>
+            Старт
+          </button>
+          <button className="button" onClick={() => { playClickSound(); timerManager.stop(); }}>
+            Стоп
+          </button>
+          <button className="button" onClick={() => { playClickSound(); timerManager.reset(); }}>
+            Сброс
+          </button>
+          <button className="settings-button" onClick={() => { playClickSound(); setIsSettingsOpen(true); }}>
+            <img src={SettingsIcon} alt="Настройки" />
+          </button>
+        </div>
+        <div className="mode-toggle">
+          <button
+            className="button mode-button"
+            onClick={toggleMode}
+          >
+            {timerState.mode === "work" ? "Перейти к отдыху" : "Перейти к фокусу"}
+          </button>
+        </div>
       </div>
       <div className="cycle-counter">
         <p className="completed">Завершено циклов: {timerState.cycleCount}</p>

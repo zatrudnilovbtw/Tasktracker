@@ -30,6 +30,7 @@ body {
   box-sizing: border-box;
   position: relative;
   padding: 20px;
+  padding-top: 72px;
   overflow-y: auto;
 }
 
@@ -46,10 +47,17 @@ body {
     padding-top: 60px;
   }
 
-  .button-group {
-    flex-direction: column;
-    gap: 8px;
-  }
+  .controls-row {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.button-group {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
 
   .progress {
     width: 100%;
@@ -106,10 +114,14 @@ body {
 }
 
 .mode-toggle {
+  width: 100%;
+  display: flex;
+  justify-content: center;
   margin-top: 15px;
 }
 
 .mode-button {
+  min-width: 220px;
   padding: 12px 24px;
   font-size: 16px;
   font-family: "Roboto Mono", monospace;
@@ -119,6 +131,7 @@ body {
   color: #e0e0e0;
   cursor: pointer;
   transition: all 0.2s ease;
+  text-align: center;
 }
 
 .mode-button:hover {
@@ -153,11 +166,15 @@ body {
 }
 
 .settings-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
   background: none;
   border: none;
   cursor: pointer;
   padding: 10px;
   transition: transform 0.2s ease;
+  z-index: 5;
 }
 
 .settings-button img {
@@ -176,6 +193,7 @@ body {
 
 .modal {
   position: fixed;
+  z-index: 20;
   top: 0;
   left: 0;
   width: 100%;
@@ -275,6 +293,9 @@ body {
 .cycle-counter {
   margin-top: 20px;
   padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .button-cycle {

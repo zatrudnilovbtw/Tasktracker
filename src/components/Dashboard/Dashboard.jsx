@@ -35,26 +35,26 @@ const Dashboard = () => {
   }, []);
 
   const taskStats = {
-    toDo: tasks.filter((task) => task.category === "To Do").length,
-    inProgress: tasks.filter((task) => task.category === "In Progress").length,
-    done: tasks.filter((task) => task.category === "Done").length,
+    toDo: tasks.filter((task) => task.category === "К выполнению").length,
+    inProgress: tasks.filter((task) => task.category === "В процессе").length,
+    done: tasks.filter((task) => task.category === "Выполнено").length,
   };
 
   const pieData = [
-    { title: "To Do", value: taskStats.toDo, color: "#4a90e2" },
-    { title: "In Progress", value: taskStats.inProgress, color: "#ffd700" },
-    { title: "Done", value: taskStats.done, color: "#28a745" },
+    { title: "К выполнению", value: taskStats.toDo, color: "#4a90e2" },
+    { title: "В процессе", value: taskStats.inProgress, color: "#ffd700" },
+    { title: "Выполнено", value: taskStats.done, color: "#28a745" },
   ].filter((item) => item.value > 0);
 
   return (
     <div className="dashboard-container">
-      <h1>Statistics</h1>
+      <h1>Статистика</h1>
       <div className="dashboard-content">
         <div className="task-stats">
           <div className="stats-text">
-            <p style={{ color: "#4a90e2" }}>To Do: {taskStats.toDo}</p>
-            <p style={{ color: "#ffd700" }}>In Progress: {taskStats.inProgress}</p>
-            <p style={{ color: "#28a745" }}>Done: {taskStats.done}</p>
+            <p style={{ color: "#4a90e2" }}>К выполнению: {taskStats.toDo}</p>
+            <p style={{ color: "#ffd700" }}>В процессе: {taskStats.inProgress}</p>
+            <p style={{ color: "#28a745" }}>Выполнено: {taskStats.done}</p>
           </div>
           <div className="pie-chart-wrapper">
             <PieChart
@@ -66,14 +66,14 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="pomodoro-progress">
-          <h2>Pomodoro Progress</h2>
+          <h2>Прогресс Помодоро</h2>
           <div className="pomodoro-widget">
             <p>
-              Mode: {timerState.mode.charAt(0).toUpperCase() + timerState.mode.slice(1)}{" "}
+              Режим: {timerState.mode === "work" ? "Работа" : "Перерыв"}{" "}
               - {Math.floor(timerState.seconds / 60)}:
               {(timerState.seconds % 60).toString().padStart(2, "0")}
             </p>
-            <p>Cycles Today: {timerState.cycleCount}</p>
+            <p>Циклов сегодня: {timerState.cycleCount}</p>
           </div>
         </div>
       </div>

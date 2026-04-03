@@ -49,29 +49,29 @@ const Layout = ({ dashboard, todo, notes, pomadoro, desk }) => {
       >
         <h2>TrackIT</h2>
         <ul>
-          <li onClick={() => handlePageChange("dashboard")}>
+          <li className={activePage === "dashboard" ? "active" : ""} onClick={() => handlePageChange("dashboard")}>
             <span className="icon">
-              <FaRegClipboard /> Dashboard
+              <FaRegClipboard /> Дашборд
             </span>
           </li>
-          <li onClick={() => handlePageChange("todo")}>
+          <li className={activePage === "todo" ? "active" : ""} onClick={() => handlePageChange("todo")}>
             <span className="icon">
-              <GrTask /> Tasks
+              <GrTask /> Задачи
             </span>
           </li>
-          <li onClick={() => handlePageChange("notes")}>
+          <li className={activePage === "notes" ? "active" : ""} onClick={() => handlePageChange("notes")}>
             <span className="icon">
-              <CgNotes /> Notes
+              <CgNotes /> Заметки
             </span>
           </li>
-          <li onClick={() => handlePageChange("desk")}>
+          <li className={activePage === "desk" ? "active" : ""} onClick={() => handlePageChange("desk")}>
             <span className="icon">
-            <SlPencil /> Whiteboard
+            <SlPencil /> Доска
             </span>
           </li>
-          <li onClick={() => handlePageChange("pomadoro")}>
+          <li className={activePage === "pomadoro" ? "active" : ""} onClick={() => handlePageChange("pomadoro")}>
             <span className="icon">
-              <TfiTimer /> Pomodoro
+              <TfiTimer /> Помодоро
             </span>
           </li>
         </ul>

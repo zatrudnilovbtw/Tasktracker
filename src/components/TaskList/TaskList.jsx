@@ -15,7 +15,7 @@ const TaskList = ({
   const [isAdding, setIsAdding] = useState(false);
   const [newTaskText, setNewTaskText] = useState("");
   const [newDeadline, setNewDeadline] = useState("");
-  const [newPriority, setNewPriority] = useState("Low");
+  const [newPriority, setNewPriority] = useState("Низкий");
 
   const handleAddTask = () => {
     if (newTaskText.trim()) {
@@ -40,11 +40,11 @@ const TaskList = ({
     setIsAdding(false);
     setNewTaskText("");
     setNewDeadline("");
-    setNewPriority("Low");
+    setNewPriority("Низкий");
   };
 
   const sortedTasks = tasks.sort((a, b) => {
-    const priorityOrder = { High: 1, Medium: 2, Low: 3 };
+    const priorityOrder = { "Высокий": 1, "Средний": 2, "Низкий": 3 };
     return priorityOrder[a.priority] - priorityOrder[b.priority];
   });
 
@@ -73,9 +73,9 @@ const TaskList = ({
               value={newPriority}
               onChange={(e) => setNewPriority(e.target.value)}
             >
-              <option value="High">High</option>
-              <option value="Medium">Medium</option>
-              <option value="Low">Low</option>
+              <option value="Высокий">Высокий</option>
+              <option value="Средний">Средний</option>
+              <option value="Низкий">Низкий</option>
             </select>
             <div className="task-form-actions">
               <button onClick={handleAddTask}>Сохранить</button>

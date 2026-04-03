@@ -24,14 +24,14 @@ const Todo = () => {
     if (isLoaded) localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks, isLoaded]);
 
-  const addTask = (category, taskText, deadline = null, priority = "Low") => {
+  const addTask = (category, taskText, deadline = null, priority = "Низкий") => {
     if (!taskText.trim()) return;
     const newTask = {
       id: uuidv4(),
       task: taskText,
       completed: false,
       category: category,
-      status: "To Do",
+      status: "К выполнению",
       deadline: deadline,
       priority: priority,
       completedAt: null, // Добавляем поле для даты завершения
@@ -43,7 +43,7 @@ const Todo = () => {
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
         task.id === id
-          ? { ...task, completed: !task.completed, category: task.completed ? "To Do" : "Done" }
+          ? { ...task, completed: !task.completed, category: task.completed ? "К выполнению" : "Выполнено" }
           : task
       )
     );
@@ -118,7 +118,7 @@ const Todo = () => {
 
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="category-section">
-          {["To Do", "In Progress", "Done"].map((category) => (
+          {["К выполнению", "В процессе", "Выполнено"].map((category) => (
             <TaskList
               key={category}
               category={category}
